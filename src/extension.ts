@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import {latexSymbols} from './latex';
 import {LatexCompletionItemProvider} from './completion'
 
-const RE_LATEX_NAME = /(\\\S+)/g;
+const RE_LATEX_NAME = /(\\\w+)/g;
 
 let latexItems: vscode.QuickPickItem[] = [];
 let pickOptions: vscode.QuickPickOptions = {
