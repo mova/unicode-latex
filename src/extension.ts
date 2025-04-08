@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
-import {latexSymbols} from './latex';
-import {LatexCompletionItemProvider} from './completion'
+import { latexSymbols } from './latex';
+import { LatexCompletionItemProvider } from './completion'
 
-const RE_LATEX_NAME = /(\\\w+)/g;
+const RE_LATEX_NAME = /([A-Za-z]+|[\^_][0-9A-Za-z]+|[\^_][\(\)+-=])/g;
 
 let latexItems: vscode.QuickPickItem[] = [];
 let pickOptions: vscode.QuickPickOptions = {
@@ -40,10 +40,10 @@ function insertSymbol(item: vscode.QuickPickItem) {
     let editor = vscode.window.activeTextEditor;
     if (!editor) { return; }
 
-    editor.edit( (editBuilder) => {
+    editor.edit((editBuilder) => {
         editBuilder.delete(editor.selection);
-    }).then( () => {
-        editor.edit( (editBuilder) => {
+    }).then(() => {
+        editor.edit((editBuilder) => {
             editBuilder.insert(editor.selection.start, item.label);
         });
     });
@@ -79,4 +79,4 @@ function replaceWithUnicode(editor: vscode.TextEditor) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
